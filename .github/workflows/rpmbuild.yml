@@ -22,7 +22,7 @@ jobs:
         service_file: "prometheus.service"
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v3
       with:
         name: Binary RPM
         path: ${{ steps.rpm.outputs.rpm_dir_path }}
