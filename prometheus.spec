@@ -10,7 +10,7 @@ Release:       2%{?dist}
 Summary:       An open-source systems monitoring and alerting toolkit with an active ecosystem.
 License:       Apache License 2.0
 URL:           https://prometheus.io/
-Source0:       https://github.com/prometheus/prometheus/archive/refs/tags/v%{version}.zip
+Source0:       https://github.com/prometheus/prometheus/releases/download/v%{version}/%{name}-%{version}.linux-amd64.tar.gz
 Source1:       prometheus.service
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
