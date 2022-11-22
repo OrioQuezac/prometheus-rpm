@@ -3,7 +3,7 @@
 build_prometheus() {
   # Prometheus version
   VERSION="2.27.1"
-  sudo wget https://github.com/prometheus/prometheus/releases/download/v${VERSION}/prometheus-${VERSION}.linux-amd64.tar.gz -O /workspace/prometheus-${VERSION}.tar.gz -c
+  # sudo wget https://github.com/prometheus/prometheus/releases/download/v${VERSION}/prometheus-${VERSION}.linux-amd64.tar.gz -O /workspace/prometheus-${VERSION}.tar.gz -c
 
   sudo rpmbuild \
   	--clean \
@@ -33,7 +33,7 @@ build_alertmanager() {
 build_postgres_exporter() {
   # postgres_exporter version
   VERSION="0.10.0"
-  sudo wget https://github.com/prometheus-community/postgres_exporter/releases/download/v${VERSION}/postgres_exporter-${VERSION}.linux-amd64.tar.gz -O /workspace/exporters/postgres_exporter-${VERSION}.tar.gz -c 
+  sudo wget https://github.com/prometheus-community/postgres_exporter/releases/download/v${VERSION}/postgres_exporter-${VERSION}.linux-amd64.tar.gz -O /workspace/exporters/postgres_exporter-${VERSION}.tar.gz -c
   sudo wget https://raw.githubusercontent.com/prometheus-community/postgres_exporter/v${VERSION}/queries.yaml -O /workspace/exporters/queries.yaml
 
   sudo rpmbuild \
