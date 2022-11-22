@@ -8,14 +8,14 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: build RPM CentOS 8 package
-      id: rpm
+      id: rpm-8
       uses: orioquezac/rpmbuild@centos8-dlsources
       with:
         spec_file: "prometheus.spec"
         service_file: "prometheus.service"
 
     - name: build RPM CentOS 7 package
-      id: rpm
+      id: rpm-7
       uses: orioquezac/rpmbuild@master
       with:
         spec_file: "prometheus.spec"
