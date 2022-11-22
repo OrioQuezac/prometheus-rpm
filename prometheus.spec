@@ -4,7 +4,7 @@
   %define dist .el7
 %endif
 
-Name:          %{pkgname}
+Name:          prometheus
 Version:       2.27.1
 Release:       2%{?dist}
 Summary:       An open-source systems monitoring and alerting toolkit with an active ecosystem.
