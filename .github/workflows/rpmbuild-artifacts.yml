@@ -1,0 +1,21 @@
+name: RPM Build
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: build RPM CentOS 8 package
+      id: rpm-8
+      uses: orioquezac/rpmbuild@rocky8
+      with:
+        spec_file: "prometheus.spec"
+        sources_dir: "."
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: prometheus-rpm
+        path: rpmbuild/RPMS/
