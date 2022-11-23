@@ -1,8 +1,8 @@
 #!/bin/bash -eux
 
 build_prometheus() {
-  cp ${HOME}/workspace/prometheus.spec ${HOME}/rpmbuild/SPECS
-  cp ${HOME}/workspace/prometheus.service ${HOME}/rpmbuild/SOURCES
+  cp ${HOME}/workspace/prometheus/prometheus.spec ${HOME}/rpmbuild/SPECS
+  cp ${HOME}/workspace/prometheus/prometheus.service ${HOME}/rpmbuild/SOURCES
   spectool -g -R ${HOME}/rpmbuild/SPECS/prometheus.spec
 
   rpmbuild \

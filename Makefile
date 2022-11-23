@@ -4,7 +4,7 @@ RPM_DIST?=centos7
 all:
 	PKG=all docker-compose run --rm $(RPM_DIST)
 
-prometheus:
+prometheus-rpm:
 	PKG=prometheus docker-compose run --rm $(RPM_DIST)
 
 prometheus-alertmanager:
