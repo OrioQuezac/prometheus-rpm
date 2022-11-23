@@ -1,70 +1,58 @@
 #!/bin/bash -eux
 
 build_prometheus() {
-  # Prometheus version
-  VERSION="2.40.2"
-  wget https://github.com/prometheus/prometheus/releases/download/v${VERSION}/prometheus-${VERSION}.linux-amd64.tar.gz -O /workspace/prometheus-${VERSION}.tar.gz -c
+  cp ${HOME}/workspace/prometheus.spec ${HOME}/rpmbuild/SPECS
+  cp ${HOME}/workspace/prometheus.service ${HOME}/rpmbuild/SOURCES
+  spectool -g -R ${HOME}/rpmbuild/SPECS/prometheus.spec
 
   rpmbuild \
   	--clean \
-  	--define "pkgversion ${VERSION}" \
-  	--define "_topdir ${PWD}/tmp/rpm" \
-  	--define "_sourcedir ${PWD}/workspace" \
-  	-bb /workspace/prometheus.spec
+  	-ba ${HOME}/rpmbuild/SPECS/prometheus.spec
 
-  cp ${PWD}/tmp/rpm/x86_64/*.rpm ${PWD}/workspace/build/
+  cp ${HOME}/rpmbuild/RPMS/x86_64/*.rpm ${HOME}/workspace/build/
 }
 
 build_alertmanager() {
-  # alertmanager version
-  VERSION="0.24.0"
-  wget https://github.com/prometheus/alertmanager/releases/download/v${VERSION}/alertmanager-${VERSION}.linux-amd64.tar.gz -O /workspace/alertmanager/alertmanager-${VERSION}.tar.gz -c
+  cp ${HOME}/workspace/alertmanager/prometheus-alertmanager.spec ${HOME}/rpmbuild/SPECS
+  cp ${HOME}/workspace/alertmanager/prometheus-alertmanager.service ${HOME}/rpmbuild/SOURCES
+  spectool -g -R ${HOME}/rpmbuild/SPECS/prometheus-alertmanager.spec
 
   rpmbuild \
   	--clean \
-  	--define "pkgversion ${VERSION}" \
-  	--define "_topdir ${PWD}/tmp/rpm" \
-  	--define "_sourcedir ${PWD}/workspace/alertmanager" \
-	-bb /workspace/alertmanager/prometheus-alertmanager.spec
+  	-ba ${HOME}/rpmbuild/SPECS/prometheus-alertmanager.spec
 
-  cp ${PWD}/tmp/rpm/x86_64/*.rpm ${PWD}/workspace/build/
+  cp ${HOME}/rpmbuild/RPMS/x86_64/*.rpm ${HOME}/workspace/build/
 }
 
 build_postgres_exporter() {
-  # postgres_exporter version
-  VERSION="0.11.1"
-  wget https://github.com/prometheus-community/postgres_exporter/releases/download/v${VERSION}/postgres_exporter-${VERSION}.linux-amd64.tar.gz -O /workspace/exporters/postgres_exporter-${VERSION}.tar.gz -c
-  wget https://raw.githubusercontent.com/prometheus-community/postgres_exporter/v${VERSION}/queries.yaml -O /workspace/exporters/queries.yaml
+  cp ${HOME}/workspace/exporters/prometheus-postgres-exporter.spec ${HOME}/rpmbuild/SPECS
+  cp ${HOME}/workspace/exporters/* ${HOME}/rpmbuild/SOURCES
+  spectool -g -R ${HOME}/rpmbuild/SPECS/prometheus-postgres-exporter.spec
 
   rpmbuild \
-    --clean \
-    --define "pkgversion ${VERSION}" \
-    --define "_topdir ${PWD}/tmp/rpm" \
-    --define "_sourcedir ${PWD}/workspace/exporters" \
-    -bb /workspace/exporters/prometheus-postgres-exporter.spec
+  	--clean \
+  	-ba ${HOME}/rpmbuild/SPECS/prometheus-postgres-exporter.spec
 
-  cp ${PWD}/tmp/rpm/x86_64/*.rpm ${PWD}/workspace/build/
+  cp ${HOME}/rpmbuild/RPMS/x86_64/*.rpm ${HOME}/workspace/build/
 }
 
 build_node_exporter() {
-  # node_exporter version
-  VERSION="1.4.0"
-  wget https://github.com/prometheus/node_exporter/releases/download/v${VERSION}/node_exporter-${VERSION}.linux-amd64.tar.gz -O /workspace/exporters/node_exporter-${VERSION}.tar.gz -c
+  cp ${HOME}/workspace/exporters/prometheus-node-exporter.spec ${HOME}/rpmbuild/SPECS
+  cp ${HOME}/workspace/exporters/* ${HOME}/rpmbuild/SOURCES
+  spectool -g -R ${HOME}/rpmbuild/SPECS/prometheus-node-exporter.spec
 
   rpmbuild \
-    --clean \
-    --define "pkgversion ${VERSION}" \
-    --define "_topdir ${PWD}/tmp/rpm" \
-    --define "_sourcedir ${PWD}/workspace/exporters" \
-    -bb /workspace/exporters/prometheus-node-exporter.spec
+  	--clean \
+  	-ba ${HOME}/rpmbuild/SPECS/prometheus-node-exporter.spec
 
-  cp ${PWD}/tmp/rpm/x86_64/*.rpm ${PWD}/workspace/build/
+  cp ${HOME}/rpmbuild/RPMS/x86_64/*.rpm ${HOME}/workspace/build/
 }
 
 
-sudo yum install wget epel-release -y
-sudo mkdir -p ${PWD}/workspace/build/
-sudo chown builder: ${PWD}/workspace/build/
+sudo yum install rpmdevtools -y
+rm -rf ${HOME}/.rpmmacros
+rpmdev-setuptree
+mkdir -p ${HOME}/workspace/build/
 
 case $1 in
   prometheus )
