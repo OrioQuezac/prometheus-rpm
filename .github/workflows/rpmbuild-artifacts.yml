@@ -7,19 +7,61 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: build RPM CentOS 7 package
-      id: rpm-7
+    - name: build prometheus RPM CentOS 7 package
+      id: prometheus-rpm-7
       uses: orioquezac/rpmbuild@master
       with:
         spec_file: "prometheus/prometheus.spec"
         sources_dir: "prometheus"
 
-    - name: build RPM CentOS 8 package
-      id: rpm-8
+    - name: build prometheus RPM CentOS 8 package
+      id: prometheus-rpm-8
       uses: orioquezac/rpmbuild@rocky8
       with:
         spec_file: "prometheus/prometheus.spec"
         sources_dir: "prometheus"
+
+    - name: build alertmanager RPM CentOS 7 package
+      id: alertmanager-rpm-7
+      uses: orioquezac/rpmbuild@master
+      with:
+        spec_file: "alertmanager/prometheus-alertmanager.spec"
+        sources_dir: "alertmanager"
+
+    - name: build alertmanager RPM CentOS 8 package
+      id: alertmanager-rpm-8
+      uses: orioquezac/rpmbuild@rocky8
+      with:
+        spec_file: "alertmanager/prometheus-alertmanager.spec"
+        sources_dir: "alertmanager"
+
+    - name: build postgres_exporter RPM CentOS 7 package
+      id: postgres_exporter-rpm-7
+      uses: orioquezac/rpmbuild@master
+      with:
+        spec_file: "exporters/prometheus-postgres-exporter.spec"
+        sources_dir: "exporters"
+
+    - name: build postgres_exporter RPM CentOS 8 package
+      id: postgres_exporter-rpm-8
+      uses: orioquezac/rpmbuild@rocky8
+      with:
+        spec_file: "exporters/prometheus-postgres-exporter.spec"
+        sources_dir: "exporters"
+
+    - name: build node_exporter RPM CentOS 7 package
+      id: node_exporter-rpm-7
+      uses: orioquezac/rpmbuild@master
+      with:
+        spec_file: "exporters/prometheus-node-exporter.spec"
+        sources_dir: "exporters"
+
+    - name: build node_exporter RPM CentOS 8 package
+      id: node_exporter-rpm-8
+      uses: orioquezac/rpmbuild@rocky8
+      with:
+        spec_file: "exporters/prometheus-node-exporter.spec"
+        sources_dir: "exporters"
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
