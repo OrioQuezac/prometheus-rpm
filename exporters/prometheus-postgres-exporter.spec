@@ -6,17 +6,17 @@
 %endif
 
 Name:          %{pkgname}
-Version:       %{pkgversion}
+Version:       0.11.1
 Release:       %{pkgrevision}%{?dist}
 Summary:       Prometheus exporter for PostgreSQL server metrics.
 License:       Apache License 2.0
 URL:           https://github.com/prometheus-community/postgres_exporter
 
-Source0:       postgres_exporter-%{version}.tar.gz
+Source0:       https://github.com/prometheus-community/postgres_exporter/releases/download/v%{version}/postgres_exporter-%{version}.linux-amd64.tar.gz
 Source1:       %{pkgname}.service
 Source2:       postgres_exporter.conf
 Source3:       queries-pg13.yaml
-Source4:       queries.yaml
+Source4:       https://raw.githubusercontent.com/prometheus-community/postgres_exporter/v%{version}/queries.yaml
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Obsoletes:     postgres_exporter

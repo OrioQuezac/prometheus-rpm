@@ -6,11 +6,11 @@
 %endif
 
 Name:          %{pkgname}
-Version:       %{pkgversion}
+Version:       0.24.0
 Release:       %{pkgrevision}%{?dist}
 Summary:       Handles alerts sent by client applications such as the Prometheus server.
 License:       Apache-2.0
-Source0:       alertmanager-%{version}.tar.gz
+Source0:       https://github.com/prometheus/alertmanager/releases/download/v%{version}/alertmanager-%{version}.linux-amd64.tar.gz
 Source1:       %{pkgname}.service
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 

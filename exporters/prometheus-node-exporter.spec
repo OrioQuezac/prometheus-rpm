@@ -6,13 +6,13 @@
 %endif
 
 Name:          %{pkgname}
-Version:       %{pkgversion}
+Version:       1.4.0
 Release:       %{pkgrevision}%{?dist}
 Summary:       Prometheus exporter for hardware and OS metrics
 License:       Apache License 2.0
 URL:           https://github.com/prometheus/node_exporter
 
-Source0:       node_exporter-%{version}.tar.gz
+Source0:       https://github.com/prometheus/node_exporter/releases/download/v%{version}/node_exporter-%{version}.linux-amd64.tar.gz
 Source1:       %{pkgname}.service
 Source2:       node_exporter.conf
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

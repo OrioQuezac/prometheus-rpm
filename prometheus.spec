@@ -1,16 +1,17 @@
 %define debug_package %{nil}
 %global pkgname prometheus
+%{!?pkgrevision: %global pkgrevision 1}
 %if 0%{?rhel} == 7
   %define dist .el7
 %endif
 
 Name:          %{pkgname}
-Version:       %{pkgversion}
-Release:       2%{?dist}
+Version:       2.40.2
+Release:       %{pkgrevision}%{?dist}
 Summary:       An open-source systems monitoring and alerting toolkit with an active ecosystem.
 License:       Apache License 2.0
 URL:           https://prometheus.io/
-Source0:       %{pkgname}-%{version}.tar.gz
+Source0:       https://github.com/prometheus/prometheus/releases/download/v%{version}/%{name}-%{version}.linux-amd64.tar.gz
 Source1:       prometheus.service
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
