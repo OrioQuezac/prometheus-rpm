@@ -7,8 +7,8 @@ services:
     - VERSION
     - PKG
     volumes:
-    - .:/workspace
-    command: /workspace/build.sh ${PKG}
+    - .:/home/builder/workspace
+    command: /home/builder/workspace/build.sh ${PKG}
 
   centos8:
     build:
@@ -19,5 +19,5 @@ services:
     environment:
     - VERSION
     volumes:
-    - .:/workspace
-    command: /workspace/build.sh ${PKG}
+    - .:/home/builder/workspace
+    command: /home/builder/workspace/build.sh ${PKG}
