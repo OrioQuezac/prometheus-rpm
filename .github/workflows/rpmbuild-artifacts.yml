@@ -11,7 +11,7 @@ jobs:
       id: rpm-8
       uses: orioquezac/rpmbuild@rocky8
       with:
-        spec_file: "prometheus.spec"
+        spec_file: "prometheus/prometheus.spec"
         sources_dir: "prometheus"
 
     - name: Upload artifact
