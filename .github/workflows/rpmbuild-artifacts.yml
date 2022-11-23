@@ -12,7 +12,7 @@ jobs:
       uses: orioquezac/rpmbuild@rocky8
       with:
         spec_file: "prometheus.spec"
-        sources_dir: "."
+        sources_dir: ""
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
